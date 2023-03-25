@@ -1,25 +1,34 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "name": "MUI Boilerplate",
+  "short_name": "MUI",
+  "display": "minimal-ui",
+  "start_url": "/",
+  "theme_color": "#007FFF",
+  "background_color": "#ffffff",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "icons/48x48.png",
+      "sizes": "48x48"
     },
     {
-      "src": "logo192.png",
-      "type": "image/png",
+      "src": "icons/96x96.png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "icons/192x192.png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
-      "type": "image/png",
+      "src": "icons/256x256.png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "icons/384x384.png",
+      "sizes": "384x384"
+    },
+    {
+      "src": "icons/512x512.png",
       "sizes": "512x512"
     }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  ]
 }
