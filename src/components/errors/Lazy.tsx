@@ -1,9 +1,10 @@
-import { styled, Box, Button, CircularProgress, Typography } from '@mui/material';
+import { styled, Box, BoxProps, Button, CircularProgress, Typography } from '@mui/material';
 
-const ErrorContainer = styled(Box)<{
-    component?: React.ReactNode;
+interface ErrorContainerProps extends BoxProps {
     role?: string;
-}>(({ theme }) => ({
+};
+
+const ErrorContainer = styled(Box)<ErrorContainerProps>(({ theme }) => ({
     padding: theme.spacing(2),
     display: 'flex',
     flexDirection: 'column',
@@ -13,12 +14,12 @@ const ErrorContainer = styled(Box)<{
     backgroundColor: theme.palette.background.paper
 }));
 
-interface ErrorProps {
+interface ErrorFallbackProps {
     error: { message: string };
     resetErrorBoundary: () => void;
 };
 
-export const ErrorFallback = ({ error, resetErrorBoundary }: ErrorProps) => (
+export const ErrorFallback = ({ error, resetErrorBoundary }: ErrorFallbackProps) => (
     <ErrorContainer component='div' role='alert'>
         <Typography variant='body1' fontSize='large' gutterBottom>Something went wrong:</Typography>
         <Typography component='code' color='error' sx={{ p: 2, whiteSpace: 'pre-line' }}>{error.message}</Typography>
@@ -26,9 +27,7 @@ export const ErrorFallback = ({ error, resetErrorBoundary }: ErrorProps) => (
     </ErrorContainer>
 );
 
-const Container = styled(Box)<{
-    component?: React.ReactNode;
-}>(({ theme }) => ({
+const Container = styled(Box)<BoxProps>(({ theme }) => ({
     height: '100vh',
     width: '100vw',
     display: 'flex',
@@ -47,14 +46,12 @@ const Text = styled(Typography)(({ theme }) => ({
 }));
 
 const Loader = styled(CircularProgress)(({ theme }) => ({
-    color: theme.palette.error.main,
+    color: theme.palette.info.dark,
 }));
 
 export const LoadingContainer = () => (
     <Container component='main'>
         <Loader />
-        <Text variant='h5'>
-            Loading...
-        </Text>
+        <Text variant='h5'>Loading...</Text>
     </Container>
 );

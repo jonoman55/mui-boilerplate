@@ -8,7 +8,7 @@ import type { Children } from '../../types';
  * @returns JSX Element wrapped in MUI container
  */
 export const PageItem = ({ children }: Children) => (
-    <Container sx={{ mt: 8 }}>
-        {children}
-    </Container>
+	<Container sx={{ mt: 8 }}>
+		{children}
+	</Container>
 );

@@ -27,3 +27,10 @@ export type ZoomStyles = {
   bottom: number;
   right: number;
 };
+
+export type LinkItem = {
+  id: number;
+  name: string;
+  to: string;
+  icon: React.ReactNode;
+};
