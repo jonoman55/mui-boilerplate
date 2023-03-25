@@ -56,20 +56,30 @@ const Header = ({ children }: Children) => {
     dispatch(themeActions.switchThemeMode());
   };
 
-  const elevation: number = useMemo(
+  const elevation = useMemo<number>(
     () => drawerOpen ? 0 : 2,
+    [drawerOpen]
+  );
+
+  const position = useMemo<MuiAppBarProps["position"]>(
+    () => drawerOpen ? 'absolute' : 'fixed',
     [drawerOpen]
   );
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar position="fixed" elevation={elevation} open={drawerOpen}>
-        <Toolbar sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+      <AppBar position={position} elevation={elevation} open={drawerOpen}>
+        <Toolbar sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}>
           <SidebarButton
             drawerOpen={drawerOpen}
             onClick={handleDrawerClick}
           />
-          <Typography component="div" variant="h6" noWrap>
+          <Typography component='div' variant='h6' noWrap>
             {drawerOpen ? "MUI" : "MUI Boilerplate"}
           </Typography>
           <ThemeSwitch
