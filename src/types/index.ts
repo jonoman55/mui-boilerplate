@@ -11,7 +11,7 @@ export type Children = React.PropsWithChildren;
 export type Lazy = React.LazyExoticComponent<() => JSX.Element>;
 
 /**
- * Custom MUI Theme
+ * Custom MUI Theme Pallette
  */
 export type CustomPalette = {
   palette: {
@@ -20,14 +20,8 @@ export type CustomPalette = {
 };
 
 /**
- * Scroll Zoom Styles
+ * Nav Link Item
  */
-export type ZoomStyles = {
-  position: string;
-  bottom: number;
-  right: number;
-};
-
 export type LinkItem = {
   id: number;
   name: string;

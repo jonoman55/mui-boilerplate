@@ -1,22 +1,34 @@
+// TODO : Move styled components to Header.styled.tsx under styled dir
+// TODO : Convert MUI Typography to Link and Icon when drawerOpen is true
+
 import { useMemo } from 'react';
 import { Box, Toolbar, Typography } from '@mui/material';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import { styled } from '@mui/material/styles';
 
 import Sidebar from './Sidebar';
-import { ThemeSwitch, SidebarButton } from '../design';
+import { ThemeSwitch, SidebarButton as MenuButton } from '../design';
 import { appActions } from '../../reducers/appSlice';
 import { themeActions } from '../../reducers/themeSlice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 import type { Children } from '../../types';
 
+/**
+ * Drawer (Sidebar) Width
+ */
 const drawerWidth: number = 240;
 
+/**
+ * AppBar Props
+ */
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 };
 
+/**
+ * Styled AppBar
+ */
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop: PropertyKey) => prop !== 'open',
 })<AppBarProps>(({ theme, open }) => ({
@@ -37,6 +49,9 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
+/**
+ * Header
+ */
 const Header = ({ children }: Children) => {
   const dispatch = useAppDispatch();
 
@@ -69,18 +84,18 @@ const Header = ({ children }: Children) => {
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar position={position} elevation={elevation} open={drawerOpen}>
-        <Toolbar sx={{
+        <Toolbar id='back-to-top-anchor' sx={{
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center'
         }}>
-          <SidebarButton
+          <MenuButton
             drawerOpen={drawerOpen}
             onClick={handleDrawerClick}
           />
           <Typography component='div' variant='h6' noWrap>
-            {drawerOpen ? "MUI" : "MUI Boilerplate"}
+            {drawerOpen ? 'MUI' : 'MUI Boilerplate'}
           </Typography>
           <ThemeSwitch
             checked={darkMode}

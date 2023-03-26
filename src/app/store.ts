@@ -7,6 +7,9 @@ import appReducer from '../reducers/appSlice';
 import themeReducer from '../reducers/themeSlice';
 import { usersApi } from '../apis/usersApi';
 
+/**
+ * App Store
+ */
 export const store = configureStore({
   reducer: {
     app: appReducer,

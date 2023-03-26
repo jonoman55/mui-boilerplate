@@ -14,10 +14,10 @@ const name: Name = 'theme';
  * Toggle Theme Action Type
  */
 type ThemeActions = {
-    /**
-     * Toggle Theme Action
-     */
-    switchThemeMode: (state: ThemeState) => void;
+  /**
+   * Toggle Theme Action
+   */
+  switchThemeMode: (state: ThemeState) => void;
 };
 
 /**
@@ -30,9 +30,9 @@ type ThemeSlice = Slice<ThemeState, ThemeActions, Name>;
  * @returns true or false
  */
 const getSystemPreference = (): boolean => {
-    return window?.matchMedia(
-        '(prefers-color-scheme: dark)'
-    ).matches;
+  return window?.matchMedia(
+    '(prefers-color-scheme: dark)'
+  ).matches;
 };
 
 /**
@@ -42,21 +42,21 @@ const getSystemPreference = (): boolean => {
  * @returns true or false
  */
 const getActiveTheme = (): boolean => {
-    const theme = JSON.parse(localStorage.getItem(name) ?? '{}');
-    if (typeof theme === 'object') {
-        return getSystemPreference();
-    }
-    return Boolean(theme);
+  const theme = JSON.parse(localStorage.getItem(name) ?? '{}');
+  if (typeof theme === 'object') {
+    return getSystemPreference();
+  }
+  return Boolean(theme);
 };
 
 /**
  * Theme State
  */
 type ThemeState = {
-    /**
-     * Dark Theme Mode State
-     */
-    darkMode: boolean;
+  /**
+   * Dark Theme Mode State
+   */
+  darkMode: boolean;
 };
 
 /**
@@ -68,32 +68,32 @@ const darkMode: boolean = getActiveTheme();
  * Initial Theme State
  */
 const initialState: ThemeState = {
-    darkMode
+  darkMode
 } as ThemeState;
 
 /**
  * Theme Slice Reducers
  */
 const reducers: ThemeActions = {
-    /**
-     * Toggle Theme Mode
-     */
-    switchThemeMode: (state: ThemeState) => {
-        state.darkMode = !state.darkMode;
-        localStorage.setItem(
-            name,
-            state.darkMode.toString()
-        );
-    },
+  /**
+   * Switch Theme Mode Action
+   */
+  switchThemeMode: (state: ThemeState) => {
+    state.darkMode = !state.darkMode;
+    localStorage.setItem(
+      name,
+      state.darkMode.toString()
+    );
+  },
 };
 
 /**
  * Theme Slice
  */
 export const themeSlice: ThemeSlice = createSlice({
-    name,
-    initialState,
-    reducers
+  name,
+  initialState,
+  reducers
 });
 
 /**

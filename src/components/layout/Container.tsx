@@ -4,11 +4,11 @@ import { Children } from '../../types';
 import { DrawerHeader } from './Sidebar';
 
 /**
- * Main Container Element with Drawer Header
+ * Main Container Wrapper with Drawer (Sidebar) Header
  */
 export const Container = ({ children }: Children) => (
-    <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        {children}
-    </Box>
+  <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
+    <DrawerHeader />
+    {children}
+  </Box>
 );

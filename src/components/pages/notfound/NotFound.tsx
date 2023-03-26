@@ -5,6 +5,9 @@ import { SentimentDissatisfied as NotFoundIcon } from "@mui/icons-material";
 
 import { useAppSelector } from "../../../app/hooks";
 
+/**
+ * Not Found Card
+ */
 export const NotFound = () => {
   const navigate = useNavigate();
   const drawerOpen: boolean = useAppSelector(

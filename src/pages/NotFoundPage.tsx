@@ -1,4 +1,4 @@
-import { NotFound, PageItem } from '../components';
+import { NotFound, PageItem } from "../components";
 
 const NotFoundPage = () => (
   <PageItem>
