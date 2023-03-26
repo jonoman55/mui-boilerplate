@@ -1,12 +1,10 @@
-// TODO : Rename to MenuButton
-
 import { IconButton } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 
 /**
  * Sidebar Menu Button Props
  */
-interface SidebarButtonProps {
+interface SidebarMenuButtonProps {
   drawerOpen: boolean;
   onClick: () => void;
 };
@@ -14,7 +12,7 @@ interface SidebarButtonProps {
 /**
  * Sidebar Menu Button 
  */
-export const SidebarButton = ({ drawerOpen, onClick }: SidebarButtonProps) => (
+export const SidebarMenuButton = ({ drawerOpen, onClick }: SidebarMenuButtonProps) => (
   <IconButton
     aria-label='open drawer'
     onClick={onClick}

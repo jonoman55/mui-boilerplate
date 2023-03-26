@@ -1,53 +1,16 @@
-// TODO : Move styled components to Header.styled.tsx under styled dir
 // TODO : Convert MUI Typography to Link and Icon when drawerOpen is true
 
 import { useMemo } from 'react';
-import { Box, Toolbar, Typography } from '@mui/material';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import { styled } from '@mui/material/styles';
+import { Box, Typography } from '@mui/material';
 
 import Sidebar from './Sidebar';
-import { ThemeSwitch, SidebarButton as MenuButton } from '../design';
+import { ThemeSwitch, SidebarMenuButton as MenuButton } from '../design';
+import { AppBar, Toolbar } from '../styled/Header.styled';
 import { appActions } from '../../reducers/appSlice';
 import { themeActions } from '../../reducers/themeSlice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
-import type { Children } from '../../types';
-
-/**
- * Drawer (Sidebar) Width
- */
-const drawerWidth: number = 240;
-
-/**
- * AppBar Props
- */
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-};
-
-/**
- * Styled AppBar
- */
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop: PropertyKey) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    borderBottom: `1px solid ${theme.palette.divider}`,
-    backgroundColor: 'inherit',
-  }),
-}));
+import type { Children, Position } from '../../types';
 
 /**
  * Header
@@ -76,20 +39,15 @@ const Header = ({ children }: Children) => {
     [drawerOpen]
   );
 
-  const position = useMemo<MuiAppBarProps["position"]>(
+  const position = useMemo<Position>(
     () => drawerOpen ? 'absolute' : 'fixed',
     [drawerOpen]
   );
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar position={position} elevation={elevation} open={drawerOpen}>
-        <Toolbar id='back-to-top-anchor' sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center'
-        }}>
+      <AppBar component='div' position={position} elevation={elevation} open={drawerOpen}>
+        <Toolbar>
           <MenuButton
             drawerOpen={drawerOpen}
             onClick={handleDrawerClick}

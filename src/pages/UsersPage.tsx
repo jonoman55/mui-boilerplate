@@ -1,11 +1,9 @@
-// TODO : Import Users Card after implementation is complete and add to Routes
+import { PageItem, Users } from "../components";
 
-import React from 'react';
-
-const UsersPage = () => {
-  return (
-    <div>UsersPage</div>
-  );
-};
+const UsersPage = () => (
+  <PageItem>
+    <Users />
+  </PageItem>
+);
 
 export default UsersPage;

@@ -60,6 +60,7 @@ export const SnackbarProvider = ({ children }: Children) => {
             autoHideDuration={3000}
             TransitionComponent={Slide}
             hideIconVariant={false}
+            disableWindowBlurListener={true}
             anchorOrigin={defaultAnchorOrigin}
             action={(key: SnackbarKey) => (
                 <DismissIconButton onClick={onClickDismiss(key)} />

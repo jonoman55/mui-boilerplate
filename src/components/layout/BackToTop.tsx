@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled, useScrollTrigger, Zoom, Box, Fab, FabProps, CSSObject } from '@mui/material';
 import { KeyboardArrowUp as UpIcon } from '@mui/icons-material';
+import { blue } from '@mui/material/colors';
 
 import type { Children } from '../../types';
 
@@ -17,8 +18,10 @@ const zoomBoxStyles: CSSObject = {
  * Scroll To Top Icon Button (FAB)
  */
 const UpIconButton = styled(Fab)<FabProps>(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  backgroundColor: theme.palette.primary.main,
+  color: theme.palette.common.white,
+  backgroundColor: theme.palette.mode === 'light'
+    ? blue[700]
+    : blue[800],
 }));
 
 /**
@@ -74,7 +77,7 @@ const ScrollTop = (props: ScrollTopProps) => {
 const BackToTop = (props: Children) => (
   <ScrollTop {...props}>
     <UpIconButton color='primary' size='small' aria-label='scroll back to top'>
-      <UpIcon sx={{ color: 'primary.contrastText' }} />
+      <UpIcon />
     </UpIconButton>
   </ScrollTop>
 );

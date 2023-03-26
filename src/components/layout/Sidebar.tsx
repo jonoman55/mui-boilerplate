@@ -1,83 +1,15 @@
-// TODO : Move styled components to Sidebar.styled.tsx under styled dir
 // TODO : Import linkItems from constants to fill in Sidebar ListItems
 
 import React from 'react';
-import { Drawer as MuiDrawer, DrawerProps, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, IconButton } from '@mui/material';
+import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, IconButton } from '@mui/material';
 import { ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon, MoveToInbox as InboxIcon, Mail as MailIcon } from '@mui/icons-material';
-import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
+import { useTheme, Theme } from '@mui/material/styles';
 
+import { Drawer, DrawerHeader, iconStyles } from '../styled/Sidebar.styled';
 import { appActions } from '../../reducers/appSlice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 import type { Children } from '../../types';
-
-/**
- * Drawer (Sidebar) Width
- */
-const drawerWidth: number = 240;
-
-/**
- * Open Drawer (Sidebar) Styles
- */
-const openedMixin = (theme: Theme): CSSObject => ({
-  width: drawerWidth,
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflowX: 'hidden',
-});
-
-/**
- * Closed Drawer (Sidebar) Styles
- */
-const closedMixin = (theme: Theme): CSSObject => ({
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
-  },
-});
-
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== 'open'
-})<DrawerProps>(({ theme, open }) => ({
-  width: drawerWidth,
-  flexShrink: 0,
-  whiteSpace: 'nowrap',
-  boxSizing: 'border-box',
-  ...(open && {
-    ...openedMixin(theme),
-    '& .MuiDrawer-paper': openedMixin(theme),
-  }),
-  ...(!open && {
-    ...closedMixin(theme),
-    '& .MuiDrawer-paper': closedMixin(theme),
-  }),
-}));
-
-/**
- * Icon Styles
- */
-const iconStyles: CSSObject = {
-  color: 'primary.contrastText'
-};
-
-/**
- * Styled Drawer (Sidebar) Header
- */
-export const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'flex-end',
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-}));
 
 /**
  * Sidebar

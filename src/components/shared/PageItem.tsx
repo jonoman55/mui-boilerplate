@@ -6,7 +6,7 @@ import type { Children } from '../../types';
  * Page Item Wrapper Component
  */
 export const PageItem = ({ children }: Children) => (
-	<Container sx={{ mt: 8 }}>
+	<Container maxWidth='lg' sx={{ mt: 4 }}>
 		{children}
 	</Container>
 );

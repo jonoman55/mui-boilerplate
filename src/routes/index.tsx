@@ -10,7 +10,11 @@ import type { Lazy } from '../types';
 /**
  * Home Page
  */
-const Home: Lazy = lazy(() => import('../pages/HomePage'));
+const Home: Lazy = lazy(() => import("../pages/HomePage"));
+/**
+ * Users Page
+ */
+const Users: Lazy = lazy(() => import("../pages/UsersPage"));
 /**
  * Not Found Page
  */
@@ -24,7 +28,8 @@ const Routes = () => (
     <Layout>
       <Switch>
         <Route path='/' element={<Home />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path='/users' element={<Users />} />
+        <Route path="*"  element={<NotFound />} />
       </Switch>
     </Layout>
   </Router>

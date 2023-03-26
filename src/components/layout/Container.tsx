@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { Children } from '../../types';
 
-import { DrawerHeader } from './Sidebar';
+import { DrawerHeader } from '../styled/Sidebar.styled';
 
 /**
  * Main Container Wrapper with Drawer (Sidebar) Header

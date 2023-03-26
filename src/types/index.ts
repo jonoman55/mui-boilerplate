@@ -1,4 +1,5 @@
 import * as React from "react";
+import { AppBarProps } from "@mui/material";
 
 /**
  * React Children Props
@@ -28,3 +29,8 @@ export type LinkItem = {
   to: string;
   icon: React.ReactNode;
 };
+
+/**
+ * AppBar Position
+ */
+export type Position = AppBarProps["position"];

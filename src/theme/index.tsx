@@ -30,28 +30,28 @@ declare module '@mui/material/styles' {
 /**
  * Light Mode Scrollbar Styles
  */
-const scrollBodyLight: CSSObject  = {
-  scrollbarColor: '#959595 #2b2b2b',
+const scrollBodyLight: CSSObject = {
+  scrollbarColor: '#ededed #d2d2d2',
   '&::-webkit-scrollbar, & *::-webkit-scrollbar': {
-    backgroundColor: '#2b2b2b',
+    backgroundColor: '#d2d2d2',
   },
   '&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb': {
     borderRadius: 8,
     backgroundColor: '#959595',
     minHeight: 24,
-    border: '3px solid #2b2b2b',
+    border: '3px solid #d2d2d2',
   },
   '&::-webkit-scrollbar-thumb:focus, & *::-webkit-scrollbar-thumb:focus': {
-    backgroundColor: '#6b6b6b',
+    backgroundColor: '#ededed',
   },
   '&::-webkit-scrollbar-thumb:active, & *::-webkit-scrollbar-thumb:active': {
-    backgroundColor: '#6b6b6b',
+    backgroundColor: '#ededed',
   },
   '&::-webkit-scrollbar-thumb:hover, & *::-webkit-scrollbar-thumb:hover': {
-    backgroundColor: '#6b6b6b',
+    backgroundColor: '#ededed',
   },
   '&::-webkit-scrollbar-corner, & *::-webkit-scrollbar-corner': {
-    backgroundColor: '#2b2b2b',
+    backgroundColor: '#d2d2d2',
   },
 };
 
