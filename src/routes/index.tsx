@@ -12,6 +12,14 @@ import type { Lazy } from '../types';
  */
 const Home: Lazy = lazy(() => import("../pages/HomePage"));
 /**
+ * Require Auth Component
+ */
+const Auth: Lazy = lazy(() => import("../pages/RequireAuth"));
+/**
+ * Login Page
+ */
+const Login: Lazy = lazy(() => import("../pages/LoginPage"));
+/**
  * Users Page
  */
 const Users: Lazy = lazy(() => import("../pages/UsersPage"));
@@ -27,9 +35,12 @@ const Routes = () => (
   <Router>
     <Layout>
       <Switch>
-        <Route path='/' element={<Home />} />
-        <Route path='/users' element={<Users />} />
-        <Route path="*"  element={<NotFound />} />
+        <Route path='/' element={<Auth />}>
+          <Route index element={<Home />} />
+          <Route path='users' element={<Users />} />
+        </Route>
+        <Route path='/login'element={<Login />} />
+        <Route path="*" element={<NotFound />} />
       </Switch>
     </Layout>
   </Router>

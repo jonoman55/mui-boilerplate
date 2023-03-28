@@ -4,6 +4,7 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
 import appReducer from '../reducers/appSlice';
+import authReducer from '../reducers/authSlice';
 import themeReducer from '../reducers/themeSlice';
 import { usersApi } from '../apis/usersApi';
 
@@ -13,6 +14,7 @@ import { usersApi } from '../apis/usersApi';
 export const store = configureStore({
   reducer: {
     app: appReducer,
+    auth: authReducer,
     theme: themeReducer,
     [usersApi.reducerPath]: usersApi.reducer,
   },
