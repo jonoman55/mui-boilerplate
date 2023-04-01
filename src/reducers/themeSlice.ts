@@ -1,4 +1,5 @@
-import { createSlice, Slice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
+import { ThemeMode } from '../types';
 
 /**
  * Theme Slice Name Type
@@ -11,13 +12,17 @@ type Name = 'theme';
 const name: Name = 'theme';
 
 /**
- * Toggle Theme Action Type
+ * Theme Slice Actions
  */
 type ThemeActions = {
   /**
-   * Toggle Theme Action
+   * Switch Theme Action
    */
   switchThemeMode: (state: ThemeState) => void;
+  /**
+   * Set Theme Mode Action
+   */
+  setThemeMode: (state: ThemeState, action: PayloadAction<ThemeMode>) => void;
 };
 
 /**
@@ -57,6 +62,10 @@ type ThemeState = {
    * Dark Theme Mode State
    */
   darkMode: boolean;
+  /**
+   * Theme Mode State
+   */
+  themeMode: ThemeMode;
 };
 
 /**
@@ -65,10 +74,26 @@ type ThemeState = {
 const darkMode: boolean = getActiveTheme();
 
 /**
+ * Get Active Theme Mode
+ */
+const getThemeMode = (): ThemeMode => {
+  if (getSystemPreference()) {
+    return 'system';
+  }
+  return darkMode ? 'dark' : 'light';
+};
+
+/**
+ * Theme Mode
+ */
+const themeMode: ThemeMode = getThemeMode();
+
+/**
  * Initial Theme State
  */
 const initialState: ThemeState = {
-  darkMode
+  darkMode,
+  themeMode,
 } as ThemeState;
 
 /**
@@ -76,7 +101,7 @@ const initialState: ThemeState = {
  */
 const reducers: ThemeActions = {
   /**
-   * Switch Theme Mode Action
+   * Switch Theme Action
    */
   switchThemeMode: (state: ThemeState) => {
     state.darkMode = !state.darkMode;
@@ -84,6 +109,12 @@ const reducers: ThemeActions = {
       name,
       state.darkMode.toString()
     );
+  },
+  /**
+   * Set Theme Mode 
+   */
+  setThemeMode: (state: ThemeState, action: PayloadAction<ThemeMode>) => {
+    state.themeMode = action.payload;
   },
 };
 

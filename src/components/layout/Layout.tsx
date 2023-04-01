@@ -1,9 +1,8 @@
-// TODO : Add Sticky Footer Component
-
 import { Box } from '@mui/material';
 
 import Header from './Header';
 import BackToTop from './BackToTop';
+import { Footer } from './Footer';
 import { TopAnchor } from './TopAnchor';
 import { Container } from './Container';
 
@@ -23,5 +22,6 @@ export const Layout = ({ children }: Children) => (
         children={children}
       />
     </Container>
+    <Footer />
   </Box>
 );

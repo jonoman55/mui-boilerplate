@@ -8,10 +8,16 @@ import { SnackbarProvider } from './contexts/AlertContext';
 import { ErrorFallback, LoadingContainer } from './components';
 import { useActiveTheme } from './hooks';
 
+/**
+ * App Routes (code-split)
+ */
 const Routes: React.LazyExoticComponent<() => JSX.Element> = lazy(
   () => import('./routes')
 );
 
+/**
+ * App Component
+ */
 const App: React.FC<{}> = (): JSX.Element => {
   const theme: Theme = useActiveTheme();
   return (

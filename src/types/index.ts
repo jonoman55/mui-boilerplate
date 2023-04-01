@@ -21,16 +21,32 @@ export type CustomPalette = {
 };
 
 /**
+ * AppBar Position
+ */
+export type Position = AppBarProps["position"];
+
+/**
  * Nav Link Item
  */
 export type LinkItem = {
   id: number;
   name: string;
+  description?: string;
   to: string;
   icon: React.ReactNode;
 };
 
 /**
- * AppBar Position
+ * Theme Mode Option Item
  */
-export type Position = AppBarProps["position"];
+export type ThemeItem = {
+  id: number;
+  name: string;
+  mode: ThemeMode;
+  icon: React.ReactNode;
+};
+
+/**
+ * App Theme Mode
+ */
+export type ThemeMode = "light" | "dark" | "system";

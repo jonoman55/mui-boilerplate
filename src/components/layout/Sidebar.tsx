@@ -1,4 +1,6 @@
-// TODO : Import linkItems from constants to fill in Sidebar ListItems
+// TODO : Create ListItem Button Link components with react-router-dom Links for navigation
+// TODO : Create ToggleButtonGroup for the themeItems
+// TODO : Create List Item for authItems
 
 import React from 'react';
 import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, IconButton } from '@mui/material';
@@ -8,8 +10,9 @@ import { useTheme, Theme } from '@mui/material/styles';
 import { Drawer, DrawerHeader, iconStyles } from '../styled/Sidebar.styled';
 import { appActions } from '../../reducers/appSlice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { linkItems } from '../../constants';
 
-import type { Children } from '../../types';
+import type { Children, LinkItem } from '../../types';
 
 /**
  * Sidebar
@@ -41,8 +44,8 @@ const Sidebar = ({ children }: Children) => {
         </DrawerHeader>
         {drawerOpen && <Divider />}
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+          {linkItems.map((item: LinkItem, index: number) => (
+            <ListItem key={index} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -57,15 +60,11 @@ const Sidebar = ({ children }: Children) => {
                     justifyContent: 'center',
                   }}
                 >
-                  {index % 2 === 0 ? (
-                    <InboxIcon sx={iconStyles} />
-                  ) : (
-                    <MailIcon sx={iconStyles} />
-                  )}
+                  {item.icon}
                 </ListItemIcon>
                 <ListItemText
-                  primary={text}
-                  sx={{ opacity: drawerOpen ? 1 : 0 }}
+                  primary={item.name}
+                  sx={{ opacity: drawerOpen ? 1 : 0, textTransform: 'capitalize' }}
                 />
               </ListItemButton>
             </ListItem>

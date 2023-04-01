@@ -20,6 +20,10 @@ const Auth: Lazy = lazy(() => import("../pages/RequireAuth"));
  */
 const Login: Lazy = lazy(() => import("../pages/LoginPage"));
 /**
+ * User Profile Page
+ */
+const Profile: Lazy = lazy(() => import("../pages/ProfilePage"));
+/**
  * Users Page
  */
 const Users: Lazy = lazy(() => import("../pages/UsersPage"));
@@ -37,9 +41,10 @@ const Routes = () => (
       <Switch>
         <Route path='/' element={<Auth />}>
           <Route index element={<Home />} />
+          <Route path='profile' element={<Profile />} />
           <Route path='users' element={<Users />} />
         </Route>
-        <Route path='/login'element={<Login />} />
+        <Route path='/login' element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Switch>
     </Layout>
