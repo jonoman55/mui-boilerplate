@@ -2,7 +2,7 @@
 
 import { useNavigate } from 'react-router-dom';
 import { Avatar, Box, Button, CardHeader, Grid, Typography } from '@mui/material';
-import { Construction as ConstructionIcon,   AccountCircle as ProfileIcon } from '@mui/icons-material';
+import { Construction as ConstructionIcon, AccountCircle as ProfileIcon } from '@mui/icons-material';
 
 import { Card, CardContent, CardActions } from '../../styled/Card.styled';
 
@@ -32,7 +32,7 @@ export const Profile = () => {
           </Grid>
         </CardContent>
         <CardActions>
-          <Button color='secondary' variant='contained' onClick={() => navigate('/')}>
+          <Button color='secondary' variant='contained' onClick={() => navigate('/')} sx={{ my: 1, width: 125 }}>
             Home
           </Button>
         </CardActions>

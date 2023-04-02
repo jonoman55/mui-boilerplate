@@ -173,6 +173,7 @@ export const toggleButtonGroupStyles = (theme: Theme) => ({
   padding: theme.spacing(0, 2),
   margin: theme.spacing(0, 0, 0, 0.5),
   '& .MuiSvgIcon-root': {
+    fill: theme.palette.primary.contrastText,
     marginTop: theme.spacing(0.5),
   },
   '& .MuiToggleButton-root.Mui-selected': {
@@ -191,7 +192,7 @@ export const toggleButtonGroupStyles = (theme: Theme) => ({
 /**
  * Toggle Button Styles
  */
-export const toggleButtonStyles = (theme: Theme, matches: boolean) => ({
+export const toggleButtonStyles = (theme: Theme) => ({
   width: '100%',
   height: '100%',
   display: 'flex',
@@ -199,7 +200,7 @@ export const toggleButtonStyles = (theme: Theme, matches: boolean) => ({
   flexWrap: 'nowrap',
   justifyContent: 'space-between',
   alignItems: 'center',
-  padding: !matches ? theme.spacing(1) : theme.spacing(0.75),
+  padding: theme.spacing(1),
 });
 
 /**

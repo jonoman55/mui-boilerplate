@@ -41,7 +41,7 @@ export const NotFound = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button color='secondary' variant='contained' onClick={() => navigate('/')} sx={{ width: 125 }}>
+          <Button color='secondary' variant='contained' onClick={() => navigate('/')} sx={{ my: 1, width: 125 }}>
             Home
           </Button>
         </CardActions>

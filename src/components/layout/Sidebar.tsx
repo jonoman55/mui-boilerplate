@@ -1,4 +1,3 @@
-// TODO : Update ThemeMode ListItem ToggleButtonGroup to IconButton when drawerOpen is equal to false
 // TODO : Implement useLogout hook
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -9,7 +8,7 @@ import { ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon, Login
 import { useTheme } from '@mui/material/styles';
 
 import { ToolTip } from '../controls';
-import { Drawer, DrawerHeader, List, ThemeListSubheader, colorStyles, toggleButtonGroupStyles, toggleButtonStyles } from '../styled/Sidebar.styled';
+import { Drawer, DrawerHeader, List, ThemeListSubheader, ToggleButtonText, colorStyles, toggleButtonGroupStyles, toggleButtonStyles } from '../styled/Sidebar.styled';
 import { appActions } from '../../reducers/appSlice';
 import { themeActions } from '../../reducers/themeSlice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
@@ -43,6 +42,11 @@ const Sidebar = ({ children }: Children) => {
     [auth]
   );
 
+  const themeText = useMemo<string>(
+    () => themeMode === 'light' ? 'Light Mode' : 'Dark Mode',
+    [themeMode]
+  );
+
   useEffect(() => {
     if (alignment === '') {
       setAlignment(themeMode as string);
@@ -64,6 +68,10 @@ const Sidebar = ({ children }: Children) => {
 
   const handleDrawerClose = () => {
     dispatch(appActions.setDrawerOpen(false));
+  };
+
+  const handleDrawerOpen = () => {
+    dispatch(appActions.setDrawerOpen(true));
   };
 
   const handleThemeChange = (_e: React.MouseEvent<HTMLElement>, newAlignment: string) => {
@@ -100,31 +108,43 @@ const Sidebar = ({ children }: Children) => {
             />
           ))}
         </List>
-        <List subheader={<ThemeListSubheader>Theme Mode</ThemeListSubheader>} disablePadding>
-          <ListItem divider disableGutters>
-            <ToggleButtonGroup
-              value={alignment}
-              onChange={handleThemeChange}
-              exclusive
-              fullWidth
-              aria-label='theme-modes'
-              sx={(theme) => toggleButtonGroupStyles(theme)}
-            >
-              {themeItems.map(({ id, name, mode, icon }: ThemeItem) => (
-                <ToggleButton
-                  key={id}
-                  value={name}
-                  aria-label={name}
-                  size='medium'
-                  disabled={themeMode === mode}
-                  selected={themeMode === mode}
-                  onClick={selectedTheme(mode)}
-                  sx={(theme) => toggleButtonStyles(theme, false)}
-                >
-                  {icon}
-                </ToggleButton>
-              ))}
-            </ToggleButtonGroup>
+        <List subheader={drawerOpen && <ThemeListSubheader>Theme Mode</ThemeListSubheader>} disablePadding>
+          <ListItem divider disableGutters disablePadding={!drawerOpen}>
+            {drawerOpen ? (
+              <ToggleButtonGroup
+                value={alignment}
+                onChange={handleThemeChange}
+                exclusive
+                fullWidth
+                aria-label='theme-modes'
+                sx={(theme) => toggleButtonGroupStyles(theme)}
+              >
+                {themeItems.map(({ id, name, mode, icon }: ThemeItem) => (
+                  <ToggleButton
+                    key={id}
+                    value={name}
+                    aria-label={name}
+                    size='medium'
+                    disabled={themeMode === mode}
+                    selected={themeMode === mode}
+                    onClick={selectedTheme(mode)}
+                    sx={(theme) => toggleButtonStyles(theme)}
+                  >
+                    {icon}
+                    <ToggleButtonText>{name}</ToggleButtonText>
+                  </ToggleButton>
+                ))}
+              </ToggleButtonGroup>
+            ) : (
+              <ToolTip title={themeText} placement='right' sx={{ width: '100%' }} component={
+                <ListItemButton onClick={handleDrawerOpen}>
+                  <ListItemIcon sx={colorStyles}>
+                    {themeMode === 'light' ? themeItems[0].icon : themeItems[2].icon}
+                  </ListItemIcon>
+                  <ListItemText primary={themeText} sx={colorStyles} />
+                </ListItemButton>}
+              />
+            )}
           </ListItem>
           <ToolTip title={authText} placement='right' sx={{ width: '100%' }} component={
             <ListItemButton onClick={handleLogout} divider>
