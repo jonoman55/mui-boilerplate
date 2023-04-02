@@ -1,4 +1,5 @@
 // TODO : Convert MUI Typography to Link and Icon when drawerOpen is true
+// TODO : Add ToolTip to ThemeSwitch
 
 import { useMemo } from 'react';
 import { Box, Typography } from '@mui/material';
@@ -22,16 +23,22 @@ const Header = ({ children }: Children) => {
     (state) => state.app.drawerOpen
   );
 
-  const darkMode: boolean = useAppSelector(
-    (state) => state.theme.darkMode
-  );
+  const {
+    darkMode,
+    themeMode
+  } = useAppSelector((state) => state.theme);
 
   const handleDrawerClick = () => {
     dispatch(appActions.setDrawerOpen(true));
   };
 
   const handleThemeChange = () => {
-    dispatch(themeActions.switchThemeMode());
+    dispatch(themeActions.setThemeMode(
+      !darkMode ? 'dark' : 'light'
+    ));
+    dispatch(themeActions.switchThemeMode(
+      themeMode !== 'light' ? 'light' : 'dark'
+    ));
   };
 
   const elevation = useMemo<number>(

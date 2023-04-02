@@ -1,3 +1,4 @@
+import { FallbackProps } from 'react-error-boundary';
 import { styled, Box, BoxProps, Button, CircularProgress, CircularProgressProps, Typography, TypographyProps } from '@mui/material';
 
 /**
@@ -21,17 +22,9 @@ const ErrorContainer = styled(Box)<ErrorContainerProps>(({ theme }) => ({
 }));
 
 /**
- * Error Fallback Props
- */
-interface ErrorFallbackProps {
-	error: { message: string };
-	resetErrorBoundary: () => void;
-};
-
-/**
  * Error Fallback
  */
-export const ErrorFallback = ({ error, resetErrorBoundary }: ErrorFallbackProps) => (
+export const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => (
 	<ErrorContainer component='div' role='alert'>
 		<Typography variant='body1' fontSize='large' gutterBottom>Something went wrong:</Typography>
 		<Typography component='code' color='error' sx={{ p: 2, whiteSpace: 'pre-line' }}>{error.message}</Typography>

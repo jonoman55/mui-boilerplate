@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
-import { ThemeMode } from '../types';
+import { createSlice, AnyAction, type CaseReducerActions, type CreateSliceOptions, type PayloadAction, type Reducer, Slice } from '@reduxjs/toolkit';
+
+import type { ThemeMode } from '../types';
 
 /**
  * Theme Slice Name Type
@@ -12,13 +13,17 @@ type Name = 'theme';
 const name: Name = 'theme';
 
 /**
- * Theme Slice Actions
+ * Theme Slice Reducer Actions
  */
-type ThemeActions = {
+type ThemeSliceReducer = {
+  /**
+   * Reset Theme Action
+   */
+  reset: () => void;
   /**
    * Switch Theme Action
    */
-  switchThemeMode: (state: ThemeState) => void;
+  switchThemeMode: (state: ThemeState, action: PayloadAction<ThemeMode | undefined>) => void;
   /**
    * Set Theme Mode Action
    */
@@ -28,7 +33,7 @@ type ThemeActions = {
 /**
  * Theme Slice Type
  */
-type ThemeSlice = Slice<ThemeState, ThemeActions, Name>;
+type ThemeSlice = Slice<ThemeState, ThemeSliceReducer, Name>;
 
 /**
  * Get System Preference Theme
@@ -47,7 +52,7 @@ const getSystemPreference = (): boolean => {
  * @returns true or false
  */
 const getActiveTheme = (): boolean => {
-  const theme = JSON.parse(localStorage.getItem(name) ?? '{}');
+  const theme = JSON.parse(localStorage.getItem(name) || '{}');
   if (typeof theme === 'object') {
     return getSystemPreference();
   }
@@ -74,19 +79,9 @@ type ThemeState = {
 const darkMode: boolean = getActiveTheme();
 
 /**
- * Get Active Theme Mode
- */
-const getThemeMode = (): ThemeMode => {
-  if (getSystemPreference()) {
-    return 'system';
-  }
-  return darkMode ? 'dark' : 'light';
-};
-
-/**
  * Theme Mode
  */
-const themeMode: ThemeMode = getThemeMode();
+const themeMode: ThemeMode = darkMode ? 'dark' : 'light';
 
 /**
  * Initial Theme State
@@ -99,12 +94,28 @@ const initialState: ThemeState = {
 /**
  * Theme Slice Reducers
  */
-const reducers: ThemeActions = {
+const reducers: ThemeSliceReducer = {
+  /**
+   * Reset Theme State
+   */
+  reset: () => {
+    return {
+      ...initialState,
+    };
+  },
   /**
    * Switch Theme Action
    */
-  switchThemeMode: (state: ThemeState) => {
-    state.darkMode = !state.darkMode;
+  switchThemeMode: (state: ThemeState, action: PayloadAction<ThemeMode | undefined>) => {
+    if (action?.payload === 'system') {
+      state.darkMode = getSystemPreference();
+    } else if (action?.payload === 'light') {
+      state.darkMode = false;
+    } else if (action?.payload === 'dark') {
+      state.darkMode = true;
+    } else {
+      state.darkMode = !state.darkMode;
+    }
     localStorage.setItem(
       name,
       state.darkMode.toString()
@@ -119,23 +130,31 @@ const reducers: ThemeActions = {
 };
 
 /**
- * Theme Slice
+ * Theme Slice Options
  */
-export const themeSlice: ThemeSlice = createSlice({
+const themeSliceOptions: CreateSliceOptions<ThemeState, ThemeSliceReducer, Name> = {
   name,
   initialState,
-  reducers
-});
+  reducers,
+};
 
 /**
- * Theme Slice Reducer and Actions 
+ * Theme Slice
  */
-const { reducer, actions } = themeSlice;
+export const themeSlice: ThemeSlice = createSlice(themeSliceOptions);
+
+
 /**
  * Theme Actions
  */
-export const themeActions = actions;
+export const themeActions: CaseReducerActions<ThemeSliceReducer, Name> = themeSlice.actions;
+
 /**
  * Theme Reducer
  */
-export default reducer;
+const themeReducer: Reducer<ThemeState, AnyAction> = themeSlice.reducer;
+
+/**
+ * Export Default as themeReducer
+ */
+export default themeReducer;

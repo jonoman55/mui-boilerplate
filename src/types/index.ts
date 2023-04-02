@@ -1,5 +1,5 @@
 import * as React from "react";
-import { AppBarProps } from "@mui/material";
+import { AppBarProps, TooltipProps } from "@mui/material";
 
 /**
  * React Children Props
@@ -24,6 +24,11 @@ export type CustomPalette = {
  * AppBar Position
  */
 export type Position = AppBarProps["position"];
+
+/**
+ * Tooltip Placement
+ */
+export type Placement = TooltipProps["placement"];
 
 /**
  * Nav Link Item

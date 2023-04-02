@@ -12,9 +12,9 @@ import type { LinkItem } from '../types';
  * App Navigation Link Items
  */
 export const linkItems: LinkItem[] = [
-  { id: 0, name: 'home', description: 'Home Page', to: '/', icon: <HomeIcon /> },
-  { id: 1, name: 'users', description: 'Users Page', to: '/users', icon: <UsersIcon /> },
-  { id: 2, name: 'profile', description: 'Account Profile Page', to: '/profile', icon: <ProfileIcon /> },
+  { id: 0, name: 'Home', description: 'Home Page', to: '/', icon: <HomeIcon /> },
+  { id: 1, name: 'Users', description: 'Users Page', to: '/users', icon: <UsersIcon /> },
+  { id: 2, name: 'Profile', description: 'Account Profile Page', to: '/profile', icon: <ProfileIcon /> },
 ];
 
 /**
